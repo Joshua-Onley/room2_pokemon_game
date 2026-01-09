@@ -44,7 +44,19 @@ print("Height: {}".format(height_formatted) + "(m)")
 print("Ability: {}".format(ability["name"]))
 
 
-# Choose random pokemon for CPU player
+# Choose random pokemon for CPU player (must not be the same as player chosen pokemon)
+import random
+
+pokemon_names = []
+for pokemon in pokemon_list:
+    pokemon_names.append(pokemon["name"])
+print(f"pokemon_names: {pokemon_names}")
+
+cpu_player = choice
+while cpu_player == choice:
+    cpu_player = random.choice(pokemon_names)
+
+print(f"The CPU player selects {cpu_player}")
 
 
 # simulate a battle between chosen pokemon -
