@@ -16,6 +16,7 @@ def menu():
 
 
 
+
 # Get the list of pokemon from the API
 url = "https://pokeapi.co/api/v2/pokemon/"
 response = requests.get(url)
