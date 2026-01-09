@@ -1,75 +1,56 @@
-from unittest import case
-
 import requests
 import json
+import random
+
+import utils
 from utils import get_random_pokemon
 
+#Setup:
+# Get the list of 151 Pokémon from the API
+url = "https://pokeapi.co/api/v2/pokemon?limit=151&offset=0"
 
-def menu():
-    choice = input("Please choose an option\n1: Choose your pokemon | 2: Random Pokemon")
-    match choice:
-        case 1:
-            choice = input().lower()
-            pass
-        case 2:
-            pass
-
-
-
-
-# Get the list of pokemon from the API
-url = "https://pokeapi.co/api/v2/pokemon/"
 response = requests.get(url)
 pokemon_list = json.loads(response.text)["results"]
-
-for pokemon in pokemon_list:
-    print(pokemon["name"])
-
-# Ask the user to choose a pokemon
-print("Enter your pokemon:")
-
-# Get the user's choice
-choice = input().lower()
-
-# Get the pokemon's data from the API
-url = "https://pokeapi.co/api/v2/pokemon/{}/".format(choice)
-response = requests.get(url)
-pokemon_data = json.loads(response.text)
-
-# to get ability
-abilities = pokemon_data["abilities"][0]
-ability = abilities["ability"]
-
-# to format height and weight properly
-height = int(pokemon_data["height"])
-weight = int(pokemon_data["weight"])
-
-height_formatted = height / 10
-weight_formatted = weight / 10
-
-# Print the pokemon's data
-print("Name: {}".format(pokemon_data["name"]))
-print("Weight: {}".format(weight_formatted) + "(kgs)")
-print("Height: {}".format(height_formatted) + "(m)")
-print("Ability: {}".format(ability["name"]))
-
-
-# Choose random pokemon for CPU player (must not be the same as player chosen pokemon)
-import random
 
 pokemon_names = []
 for pokemon in pokemon_list:
     pokemon_names.append(pokemon["name"])
-print(f"pokemon_names: {pokemon_names}")
 
-cpu_player = choice
-while cpu_player == choice:
-    cpu_player = random.choice(pokemon_names)
+player_choice = ""
 
-print(f"The CPU player selects {cpu_player}")
+
+def menu():
+    choice = input("Please choose an option\n1: Choose your pokemon | 2: Random Pokemon\n")
+    match choice:
+        case "1":
+            # Get the user's choice
+            input_choice = input("Enter the name of a pokemon").lower()
+
+            # Get the Pokémon's data from the API
+            url = "https://pokeapi.co/api/v2/pokemon/{}/".format(input_choice)
+            response = requests.get(url)
+            player_choice = json.loads(response.text)
+            print(player_choice)
+
+            #cpu choice
+            cpu_choice = get_random_pokemon(pokemon_names, player_choice)
+
+        case "2":
+            c = ""
+            player_choice = get_random_pokemon(pokemon_names, c)
+            cpu_choice = get_random_pokemon(pokemon_names, player_choice)
+
+            print(player_choice)
+            print(cpu_choice)
+
+
+
+menu()
+
+
+# Choose random pokemon for CPU player (must not be the same as player chosen pokemon)
+
+
 
 
 # simulate a battle between chosen pokemon -
-
-
-#
