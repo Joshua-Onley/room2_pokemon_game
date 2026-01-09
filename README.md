@@ -20,10 +20,10 @@ This project focuses on:
 ---
 
 ## 📂 Project Structure
-pokemon-game/
-├── main.py
-├── pokemon_api.py
-├── battle.py
+pokemon-game/<br>
+├── main.py <br>
+├── pokemon_api.py <br>
+├── battle.py <br>
 └── README.md
 
 ## 📝 Menu / Options
