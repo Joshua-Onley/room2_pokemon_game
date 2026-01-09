@@ -1,12 +1,5 @@
 import requests
 import json
-from utils import get_random_pokemon
-from battle import simulate_battle
-
-
-def menu():
-    pass
-
 
 # Get the list of pokemon from the API
 url = "https://pokeapi.co/api/v2/pokemon/"
@@ -43,11 +36,3 @@ print("Name: {}".format(pokemon_data["name"]))
 print("Weight: {}".format(weight_formatted) + "(kgs)")
 print("Height: {}".format(height_formatted) + "(m)")
 print("Ability: {}".format(ability["name"]))
-
-
-# Choose random pokemon for CPU player
-
-
-# simulate a battle between chosen pokemon -
-
-simulate_battle(player_pokemon, cpu_pokemon)
