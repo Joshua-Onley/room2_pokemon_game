@@ -1,10 +1,19 @@
+from unittest import case
+
 import requests
 import json
 from utils import get_random_pokemon
 
 
 def menu():
-    pass
+    choice = input("Please choose an option\n1: Choose your pokemon | 2: Random Pokemon")
+    match choice:
+        case 1:
+            choice = input().lower()
+            pass
+        case 2:
+            pass
+
 
 
 # Get the list of pokemon from the API
